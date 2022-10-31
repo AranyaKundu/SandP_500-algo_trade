@@ -1,4 +1,5 @@
 # SandP_500-algo_trade
+A more cleaner code is coming in the next update. <br>
 Collect data from S &amp; P top 500 companies listed in NASDAQ and create investment strategies based on portfolio size.
 Thanks to https://iexcloud.io/docs/api/ for providing with the data.
 Thanks to FreeCodeCamp for provinding the IEX API CLOUD TOKEN.
