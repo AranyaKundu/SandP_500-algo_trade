@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import math, requests, openpyxl
-import equal_weights as ew
+import equal_weights as ew #import functions written in equal_weights.py, if you change file name, remember to change here also
 from secrets1 import IEX_CLOUD_API_TOKEN
 from statistics import mean, median
 
@@ -41,8 +41,8 @@ def mean_median_momentum(fd, request_type):
     
 
 if __name__ == "__main__":
-    rfpath = "e:\\Python Learning\\Quant Finance\\algorithmic-trading-python-master\\starter_files\\sp_500_stocks.csv"
-    dbfpath = "e:\\Python Learning\\Quant Finance\\algorithmic-trading-python-master\\starter_files\\data.xlsx"
+    rfpath = "../sp_500_stocks.csv" # change file path
+    dbfpath = "../data.xlsx" # change file path
     to_read = openpyxl.load_workbook(dbfpath)
     ws = to_read.active
     lrow = len(list(ws.rows))
@@ -58,12 +58,12 @@ if __name__ == "__main__":
     request_type = ws.cell(row = lrow, column = 5).value
     mean_median_momentum(final_dataframe, request_type)
         
-    copied_data = final_dataframe.copy(deep=True)
+    copied_data = final_dataframe.copy(deep=True) # a copy is maintained, but not required
     copied_data.sort_values('HQM Score', ascending = False, inplace = True)
     final_dataframe = copied_data.iloc[:50].copy(deep=True)
     final_dataframe.reset_index(inplace=True, drop = True)
     position_size = val/len(final_dataframe.index)
     for i in range (0, len(final_dataframe.index)):
         final_dataframe.loc[i, 'Number of Shares to Buy'] = math.floor(position_size/final_dataframe.loc[i, 'Price'])
-    fpath = "e:/Python Learning/Quant Finance/algorithmic-trading-python-master/starter_files/Momentum recommendation.xlsx"
+    fpath = "../Momentum recommendation.xlsx" # change file path
     ew.save_excel_file(fpath, request_type, final_dataframe)
