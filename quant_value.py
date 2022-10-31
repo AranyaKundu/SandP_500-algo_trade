@@ -1,14 +1,14 @@
 import requests, math, openpyxl, os
 import numpy as np
 import pandas as pd
-import equal_weights as ew
+import equal_weights as ew # if you change file name for equal_weights.py, remember to change here also
 from secrets1 import IEX_CLOUD_API_TOKEN
 from statistics import mean, median
 
 
 def val_requests(rfpath, rv_dataframe):
     stocks = pd.read_csv(rfpath)
-    symbol_grp = list(ew.chunks(stocks['Ticker'], 100))
+    symbol_grp = list(ew.chunks(stocks['Ticker'], 100)) # batch size chosen as 100
     symbol_strings = []
     for symbol in symbol_grp:
         symbol_strings.append(','.join(symbol))
@@ -52,14 +52,14 @@ def mean_median_value(fd, request_type):
 
 
 if __name__ == "__main__":
-    rfpath = "e:\\Python Learning\\Quant Finance\\algorithmic-trading-python-master\\starter_files\\sp_500_stocks.csv"
+    rfpath = "../sp_500_stocks.csv" # change file path
     rv_columns = ['Ticker', 'Price', 'Number of Shares to Buy', 'Price-to-Earnings Ratio', 
     'Price-to-Earnings Percentile', 'Price-to-Book Ratio', 'Price-to-Book Percentile',
     'Price-to-Sales Ratio', 'Price-to-Sales Percentile', 'EV/EBITDA Ratio', 
     'EV/EBITDA Percentile', 'EV/GP Ratio', 'EV/GP Percentile', 'RV Score']
     rv_dataframe = pd.DataFrame(columns = rv_columns)
     val_requests(rfpath, rv_dataframe)
-    dbfpath = "e:\\Python Learning\\Quant Finance\\algorithmic-trading-python-master\\starter_files\\data.xlsx"
+    dbfpath = "../data.xlsx" # change file path
     to_read = openpyxl.load_workbook(dbfpath)
     ws = to_read.active
     lrow = len(list(ws.rows))
@@ -74,5 +74,5 @@ if __name__ == "__main__":
     position_size = val/len(rv_dataframe.index)
     for i in range (0, len(rv_dataframe.index)):
         rv_dataframe.loc[i, 'Number of Shares to Buy'] = math.floor(position_size/rv_dataframe.loc[i, 'Price'])
-    fpath = "e:/Python Learning/Quant Finance/algorithmic-trading-python-master/starter_files/Value_recommendation.xlsx"
+    fpath = "../Value_recommendation.xlsx" # Change file path
     ew.save_excel_file(fpath, request_type, rv_dataframe)
