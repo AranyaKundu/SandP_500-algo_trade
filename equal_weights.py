@@ -1,10 +1,13 @@
 import numpy as np
 import pandas as pd
 import openpyxl, math, requests
+# token provided by FreeCodeCamp
+# data contains sandbix values and token is free. So, it can be used for non-commercial purposes
 from secrets1 import IEX_CLOUD_API_TOKEN
 
 warning_message = "Whatever you entered as portfolio size was not a number!!! Please enter a valid number!"
 
+# this was found in https://stackoverflow.com/questions/312443/how-do-i-split-a-list-into-equally-sized-chunks
 def chunks(list_name, size):
     for i in range(0, len(list_name), size):
         yield list_name[i:i + size]
@@ -110,11 +113,12 @@ def save_excel_file(fpath, request_type, final_dataframe):
     xlw.close()
 
 if __name__ == "__main__":
-    dbfpath = "e:\\Python Learning\\Quant Finance\\algorithmic-trading-python-master\\starter_files\\data.xlsx"
+    dbfpath = "..\data.xlsx" # change to your own filepath
     to_read = openpyxl.load_workbook(dbfpath)
     ws = to_read.active
     lrow = len(list(ws.rows))
-    rfpath = 'e:\\Python Learning\\Quant Finance\\algorithmic-trading-python-master\\starter_files\\sp_500_stocks.csv'
+    # sp_500_stocks.csv file was obtained fom FreeCodeCamp
+    rfpath = '..\sp_500_stocks.csv' # Enter filepath of 'sp_500_stocks.csv' in your local machine
     my_columns = ['Ticker', 'Stock Price', 'Market Capitalization', 'Number of shares to Buy']
     final_dataframe = pd.DataFrame(columns = my_columns)
     final_dataframe
@@ -127,7 +131,9 @@ if __name__ == "__main__":
             request_type = request_type.lower()
 
             if (request_type == 'individual' or request_type == 'i'):
-                integer_input = 100
+                # default value of 100 is chosen so that the response time is not very high
+                # batch request sends request for 100 tickers at a time
+                integer_input = 100 # change the default value to the number of companies you want to check for
                 individual_requests(integer_input, rfpath)
                 position_size = val/len(final_dataframe.index)
                 for i in range (0, len(final_dataframe.index)):
@@ -144,7 +150,7 @@ if __name__ == "__main__":
             
 
             elif (request_type=='specific' or request_type=='s'): 
-                symbol = 'AAPL'#input("Enter the symbol of the company you want to check: ")
+                symbol = 'AAPL' #input("Enter the symbol of the company you want to check: ")
                 specific_requests(symbol, rfpath)
                 position_size = val/len(final_dataframe.index)
                 final_dataframe.loc[0, 'Number of shares to Buy'] = position_size/final_dataframe.iloc[0, 1]
@@ -158,5 +164,5 @@ if __name__ == "__main__":
         except ValueError: 
             ref = 1
             print(warning_message)
-    fpath = "e:/Python Learning/Quant Finance/algorithmic-trading-python-master/starter_files/Trades recommendation.xlsx"
+    fpath = "../Trades recommendation.xlsx" # change filepath from your computer
     save_excel_file(fpath, request_type, final_dataframe)
