@@ -8,5 +8,5 @@ Three different algorithmic trading strategies are discussed: Equal Weights Stra
 For equal weights with individual requests, the data is collected only for 1st 100 results. <br>
 For equal weights with specific, the value currently is set to 'AAPL'. Change the symbol in the equal_weights.py code as per your requirement. <br>
 For momentum and value strategy currently mean and median can be chosen. <br>
-<br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
 Disclaimer: The data is not collected from cloud and hence it is not the actual/ realtime data. The data is collected from sandbox. So it cannot be used for making any real investment decisions. This is because the token used is free token. However, paid token can be brought from https://iexcloud.io/ based on user requirement.
