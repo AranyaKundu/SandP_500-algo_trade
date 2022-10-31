@@ -1,6 +1,6 @@
 # SandP_500-algo_trade
 A cleaner code is coming in the next update. <br>
-Collect data from S &amp; P top 500 companies listed in NASDAQ and create investment strategies based on portfolio size. <br>
+Collected data from S &amp; P top 500 companies listed in NASDAQ and created investment strategies based on portfolio size. <br>
 Thanks to https://iexcloud.io/docs/api/ for providing with the data. <br>
 Thanks to FreeCodeCamp for provinding the IEX API CLOUD TOKEN. <br>
 Only quant_trading.py needs to be run by the user. The other programs are not recommended to be run separately as the inputs have to be given via quant_trading.py file. <br>
