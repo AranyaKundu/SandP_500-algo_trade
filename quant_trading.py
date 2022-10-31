@@ -1,8 +1,10 @@
+# This file calls the other three files. The data required in each of them is stored from the entries made through this code
+# So the other files are not recommended to be run separately.
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 import os, subprocess, time, openpyxl
-fpath = "E:\\Python Learning\\Quant Finance\\algorithmic-trading-python-master\\starter_files\\data.xlsx"
+fpath = "../data.xlsx" # stores the entry which is used by the other three files later
 
 def button1():
 
@@ -17,6 +19,7 @@ def button1():
             mynest_Button1['state'] = 'active'
         else:
             mynest_Button1['state'] = 'disable'
+            # change warning messages
             messagebox.showwarning(title="Warning", message="Please agree to the terms and conditions to proceed!")
 
     def eqwt_run(fpath):
@@ -27,6 +30,7 @@ def button1():
             fname_ew = fname_entry.get()
             lname_ew= lname_entry.get()
             if fname_ew == "" or lname_ew == "":
+                # This won't return any error but rest of the function will not be executed
                 messagebox.askokcancel("Want to continue?", "You didn't write your fullname.")
             else:
                 strategy = rqst_val.get()
@@ -116,6 +120,7 @@ def button2():
             fname = firstname_entry.get()
             lname = lastname_entry.get()
             if fname == "" or lname == "":
+                # This won't return any error but rest of the function will not be executed 
                 messagebox.askokcancel("askokcancel", "Want to continue?")  
             else:
                 strategy = strategy_type.get()
@@ -202,6 +207,7 @@ def button3():
             fname_qvs = fname.get()
             lname_qvs= lname.get()
             if fname_qvs == "" or lname_qvs == "":
+                # This won't return any error but rest of the function will not be executed
                 messagebox.askokcancel("Want to continue?", "You didn't write your fullname.")
             else:
                 strategy = strategy_type.get()
