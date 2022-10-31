@@ -1,5 +1,7 @@
 # SandP_500-algo_trade
 A cleaner code is coming in the next update. <br>
+It is better to download all the files if you want to run it.
+I urge to spend some time to understand the code before using it.
 Collected data from S &amp; P top 500 companies listed in NASDAQ and created investment strategies based on portfolio size. <br>
 Thanks to https://iexcloud.io/docs/api/ for providing with the data. <br>
 Thanks to FreeCodeCamp for provinding the IEX API CLOUD TOKEN. <br>
